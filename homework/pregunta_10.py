@@ -4,7 +4,7 @@ datos requeridos se encuentran en los archivos `tbl0.tsv`, `tbl1.tsv` y
 `tbl2.tsv`. En este laboratorio solo puede utilizar las funciones y 
 librerias de pandas para resolver las preguntas.
 """
-
+from homework.utils import new_dataframe, get_column_values_by_group
 
 def pregunta_10():
     """
@@ -20,3 +20,9 @@ def pregunta_10():
     D                   1:2:3:5:5:7
     E   1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
+    grouped = get_column_values_by_group("files/input/tbl0.tsv", "c1", "c2")
+
+    result = new_dataframe(["c2"], [grouped.apply(lambda x: ':'.join(map(str, sorted(x))))])
+    result.index.name = "c1"
+
+    return result

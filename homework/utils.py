@@ -26,3 +26,27 @@ def get_unique_sorted_column_values(file_path, column_name):
     """
     df = get_dataframe(file_path)
     return sorted(df[column_name].str.upper().unique().tolist())
+
+def get_unique_column_values(file_path, column_name):
+    """
+    Returns a list of unique values from a specified column in a TSV file.
+    """
+    df = get_dataframe(file_path)
+    return df[column_name].unique().tolist()
+
+def add_column(file_path, new_column_name, values):
+    """
+    Adds a new column to a DataFrame loaded from a TSV file.
+    """
+    df = get_dataframe(file_path)
+    df[new_column_name] = values
+    return df
+
+def new_dataframe(name_columns, columns):
+    """
+    Returns a new DataFrame with specified columns
+    """
+    df = pd.DataFrame(columns=name_columns)
+    for col_name, col_values in zip(name_columns, columns):
+        df[col_name] = col_values
+    return df
